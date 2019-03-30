@@ -8,14 +8,15 @@ import sqlite3
 class MoviesSpider(scrapy.Spider):
     name = 'movies'
 
-    # start_urls = ['https://www.imdb.com/title/tt0944947/']
-    start_urls = ['https://www.imdb.com/title/tt0808146/']
+    start_urls = ['https://www.imdb.com/title/tt0133093/']
 
     def parse(self, response):
         yield {
             'title': str.strip(unicodedata.normalize('NFKD', response.css('div.title_wrapper h1::text').get())),
             'year': response.css('span#titleYear a::text').get(),
-            'rating': response.css('div.ratingValue strong span::text').get()
+            'rating': response.css('div.ratingValue strong span::text').get(),
+            'poster': response.css('div.poster a img::attr(src)').get(),
+            'summary': str.strip(response.css('div.summary_text::text').get().replace("\n", ""))
         }
 
         # Return an array of all recommended movie links

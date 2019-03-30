@@ -20,7 +20,11 @@ class MovieToDBPipeLine(object):
         self.cursor = self.connection.cursor()
         self.cursor.execute(
             'CREATE TABLE IF NOT EXISTS movies'
-            ' (title TEXT PRIMARY KEY, year INT, rating REAL)'
+            ' (title TEXT PRIMARY KEY,'
+            ' year INT,'
+            ' rating REAL,'
+            ' poster TEXT,'
+            ' summary TEXT)'
         )
 
     def process_item(self, item, spider):
@@ -33,9 +37,15 @@ class MovieToDBPipeLine(object):
             logging.warning(f"{item['title']} is already in the database")
         else:
             self.cursor.execute(
-                'INSERT INTO movies (title, year, rating)'
-                ' VALUES (?, ?, ?)',
-                (item['title'], item['year'], item['rating'])
+                'INSERT INTO movies (title, year, rating, poster, summary)'
+                ' VALUES (?, ?, ?, ?, ?)',
+                (
+                    item['title'],
+                    item['year'],
+                    item['rating'],
+                    item['poster'],
+                    item['summary']
+                )
             )
             self.connection.commit()
             logging.info(f"{item['title']} added to the database")

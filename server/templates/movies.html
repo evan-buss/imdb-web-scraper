@@ -9,6 +9,7 @@
   </link>
   <title>Movies List</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 </head>
 
 <body class="flex justify-center bg-grey-lightest font-sans">
@@ -34,34 +35,55 @@
       </form>
 
       <!-- Previous / Next Buttons -->
-      <div class="flex w-full justify-between">
+      <div class="flex w-full justify-between mb-4">
         <div class="inline-flex">
-          <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-l">
-            <a href="">Prev</a>
-          </button>
-          <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-r">
-            <a href="">Next</a>
-          </button>
+          <a href="{{ links['prev'] }}">
+            <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-l">Prev</button>
+          </a>
+          <a href="{{ links['next'] }}">
+            <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-r">Next</button>
+          </a>
         </div>
+
+        <!-- Movie Statistics -->
         <p class="self-center">{{ stats['total'] }} <i class="text-grey roman">movies in the database</i></p>
-        <p class="self-center">Page {{ pages['current'] }} of {{ pages['max'] }}
-        </p>
-        {% if stats['results'] %}
+        <!-- Only show pages indicator if there are results found -->
+        {% if pages['max'] %}
+        <p class="self-center">Page {{ pages['current'] }} of {{ pages['max'] }}</p>
+        {% endif %}
+
+        <!-- Only show results if the user has searched for a title -->
+        {% if stats['results'] != -1 %}
         <p class="self-center">{{ stats['results'] }}
           <i class="text-grey roman">{{ 'results' if stats['results'] > 1 else 'result' }} found</i>
         </p>
         {% endif %}
       </div>
     </div>
+    <!-- Movie Card List  -->
     <div>
       {% for movie in movies %}
-      <div class="rounded-lg shadow-md mb-8 mt-8 bg-white hover:shadow-lg p-4">
-        <h1 class="truncate">{{ movie['title'] }}</h1>
-        <h2 class="font-normal">{{ movie['year'] }}</h2>
-        <h2 class="font-normal">{{ movie['rating'] }}</h2>
+      <div class="w-full lg:flex mb-8 h-64">
+        <div
+          class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+          style="background-image: url({{ movie['poster'] }})" title="{{ movie['title'] }} poster">
+        </div>
+        <div
+          class="border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+          <div class="mb-8">
+            <div class="text-black font-bold text-xl mb-2">{{ movie['title'] }}</div>
+            <p class="text-grey-darker text-base">{{movie['summary']}}</p>
+          </div>
+          <div class="flex justify-between">
+            <div class="flex justify-center items-center">
+              <span class="fas fa-star text-yellow-dark text-2xl mr-2"></span>
+              <h2 class="font-normal">{{movie['rating']}}</h2>
+            </div>
+            <h2 class="font-normal">{{movie['year']}}</h2>
+          </div>
+        </div>
       </div>
       {% endfor %}
-
     </div>
   </div>
 </body>
