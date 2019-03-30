@@ -7,12 +7,14 @@
 
 import sqlite3
 import logging
+import os
 
 
 class MovieToDBPipeLine(object):
     def __init__(self):
         self.connection = sqlite3.connect(
-            'movies.db',
+            os.path.abspath(os.path.join(
+                __file__, "../../instance/movies.db")),
             detect_types=sqlite3.PARSE_DECLTYPES
         )
         self.cursor = self.connection.cursor()

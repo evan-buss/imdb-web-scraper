@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+  </link>
+  <title>Movies List</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="flex justify-center bg-grey-lightest font-sans">
+
+  <div class="w-1/2">
+    <div>
+      <h1 class="text-center text-4xl my-4 ">
+        <a href="/movies" class="no-underline text-blue">Unofficial IMDB Movie List</a>
+      </h1>
+      <form method="get" class=" w-full">
+        <label class="block text-grey-darker text-sm font-bold mb-2" for="search">
+          Movie Search
+        </label>
+        <div class="flex mb-8">
+          <input
+            class="shadow appearance-none border w-full rounded py-2 px-3 text-grey-darker mb-3 mr-3 leading-tight focus:outline-none focus:shadow-outline"
+            id="search" name="search" type="text"
+            placeholder="{{ request.args.get('search') if not None else 'Movie Title'}}">
+          <button
+            class="bg-blue hover:bg-blue-dark text-white font-bold mb-3 py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit">Search</button>
+        </div>
+      </form>
+
+      <!-- Previous / Next Buttons -->
+      <div class="flex w-full justify-between">
+        <div class="inline-flex">
+          <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-l">
+            <a href="">Prev</a>
+          </button>
+          <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-r">
+            <a href="">Next</a>
+          </button>
+        </div>
+        <p class="self-center">{{ stats['total'] }} <i class="text-grey roman">movies in the database</i></p>
+        <p class="self-center">Page {{ pages['current'] }} of {{ pages['max'] }}
+        </p>
+        {% if stats['results'] %}
+        <p class="self-center">{{ stats['results'] }}
+          <i class="text-grey roman">{{ 'results' if stats['results'] > 1 else 'result' }} found</i>
+        </p>
+        {% endif %}
+      </div>
+    </div>
+    <div>
+      {% for movie in movies %}
+      <div class="rounded-lg shadow-md mb-8 mt-8 bg-white hover:shadow-lg p-4">
+        <h1 class="truncate">{{ movie['title'] }}</h1>
+        <h2 class="font-normal">{{ movie['year'] }}</h2>
+        <h2 class="font-normal">{{ movie['rating'] }}</h2>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</body>
+
+</html>

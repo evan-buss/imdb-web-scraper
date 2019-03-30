@@ -8,7 +8,8 @@ import sqlite3
 class MoviesSpider(scrapy.Spider):
     name = 'movies'
 
-    start_urls = ['https://www.imdb.com/title/tt0944947/']
+    # start_urls = ['https://www.imdb.com/title/tt0944947/']
+    start_urls = ['https://www.imdb.com/title/tt0808146/']
 
     def parse(self, response):
         yield {
