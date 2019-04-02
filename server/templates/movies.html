@@ -60,6 +60,7 @@
         {% endif %}
       </div>
     </div>
+    <!-- TODO: Make mobile friendly -->
     <!-- Movie Card List  -->
     <div>
       {% for movie in movies %}
@@ -69,7 +70,7 @@
           style="background-image: url({{ movie['poster'] }})" title="{{ movie['title'] }} poster">
         </div>
         <div
-          class="border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+          class="w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
           <div class="mb-8">
             <div class="text-black font-bold text-xl mb-2">{{ movie['title'] }}</div>
             <p class="text-grey-darker text-base">{{movie['summary']}}</p>

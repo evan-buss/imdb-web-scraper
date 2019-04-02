@@ -65,7 +65,7 @@ local_settings.py
 db.sqlite3
 
 # Flask stuff:
-instance/
+# instance/
 .webassets-cache
 
 # Scrapy stuff:
@@ -128,4 +128,3 @@ dmypy.json
 .pyre/
 
 # End of https://www.gitignore.io/api/python
-

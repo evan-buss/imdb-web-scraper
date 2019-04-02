@@ -13,7 +13,7 @@ BOT_NAME = 'scraper'
 
 SPIDER_MODULES = ['scraper.spiders']
 NEWSPIDER_MODULE = 'scraper.spiders'
-DEPTH_LIMIT = 10
+DEPTH_LIMIT = 30
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
