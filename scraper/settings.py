@@ -13,7 +13,7 @@ BOT_NAME = 'scraper'
 
 SPIDER_MODULES = ['scraper.spiders']
 NEWSPIDER_MODULE = 'scraper.spiders'
-DEPTH_LIMIT = 30
+# DEPTH_LIMIT = 30
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -66,7 +66,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'scraper.pipelines.MovieToDBPipeLine': 300,
+    # 'scraper.pipelines.MovieToDBPipeLine': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

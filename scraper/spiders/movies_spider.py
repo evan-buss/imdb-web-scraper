@@ -8,7 +8,16 @@ import sqlite3
 class MoviesSpider(scrapy.Spider):
     name = 'movies'
 
-    start_urls = ['https://www.imdb.com/title/tt0133093/']
+    start_urls = ['https://www.imdb.com/title/tt0133093/',
+                  'https://www.imdb.com/title/tt0206512/']
+
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'scraper.pipelines.MovieToDBPipeLine': 300
+        },
+        'DEPTH_LIMIT': 5,
+        'CONCURRENT_REQUESTS': 32
+    }
 
     def parse(self, response):
         yield {
@@ -16,7 +25,8 @@ class MoviesSpider(scrapy.Spider):
             'year': response.css('span#titleYear a::text').get(),
             'rating': response.css('div.ratingValue strong span::text').get(),
             'poster': response.css('div.poster a img::attr(src)').get(),
-            'summary': str.strip(response.css('div.summary_text::text').get().replace("\n", ""))
+            'summary': str.strip(response.css('div.summary_text::text').get().replace("\n", "")),
+            'url': response.url
         }
 
         # Return an array of all recommended movie links

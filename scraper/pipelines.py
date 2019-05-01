@@ -24,7 +24,8 @@ class MovieToDBPipeLine(object):
             ' year INT,'
             ' rating REAL,'
             ' poster TEXT,'
-            ' summary TEXT)'
+            ' summary TEXT,'
+            ' url TEXT)'
         )
 
     def process_item(self, item, spider):
@@ -37,14 +38,15 @@ class MovieToDBPipeLine(object):
             logging.warning(f"{item['title']} is already in the database")
         else:
             self.cursor.execute(
-                'INSERT INTO movies (title, year, rating, poster, summary)'
-                ' VALUES (?, ?, ?, ?, ?)',
+                'INSERT INTO movies (title, year, rating, poster, summary, url)'
+                ' VALUES (?, ?, ?, ?, ?, ?)',
                 (
                     item['title'],
                     item['year'],
                     item['rating'],
                     item['poster'],
-                    item['summary']
+                    item['summary'],
+                    item['url']
                 )
             )
             self.connection.commit()
