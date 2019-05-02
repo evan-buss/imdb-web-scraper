@@ -12,7 +12,7 @@ bp = Blueprint('movies', __name__)
 movies_per_page = 10
 
 
-@bp.route('/movies')
+@bp.route('/')
 def movies():
     db = get_db()
     total = db.execute(

@@ -12,7 +12,7 @@ class QuotesSpider(scrapy.Spider):
     def parse(self, response):
         for quote in response.css('div.quote'):
             yield {
-                'text': quote.css('span.text::text').get().replace('"', ''),
+                'text': quote.css('span.text::text').get().replace('“', '').replace('”', ''),
                 'author': quote.css('small.author::text').get(),
                 'tags': quote.css('div.tags a.tag::text').getall(),
             }

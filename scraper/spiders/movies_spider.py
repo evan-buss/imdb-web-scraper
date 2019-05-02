@@ -2,15 +2,15 @@
 
 import scrapy
 import unicodedata
-import sqlite3
 
 
 class MoviesSpider(scrapy.Spider):
     name = 'movies'
 
-    start_urls = ['https://www.imdb.com/title/tt0133093/',
+    start_urls = ['https://www.imdb.com/title/tt4154796/',
                   'https://www.imdb.com/title/tt0206512/']
 
+    # Override default settings from settings.py
     custom_settings = {
         'ITEM_PIPELINES': {
             'scraper.pipelines.MovieToDBPipeLine': 300
@@ -19,6 +19,7 @@ class MoviesSpider(scrapy.Spider):
         'CONCURRENT_REQUESTS': 32
     }
 
+    # Override default parse method
     def parse(self, response):
         yield {
             'title': str.strip(unicodedata.normalize('NFKD', response.css('div.title_wrapper h1::text').get())),
@@ -32,6 +33,6 @@ class MoviesSpider(scrapy.Spider):
         # Return an array of all recommended movie links
         new_links = response.css('div.rec_item a::attr(href)').getall()
 
-        # Basically performs a depth first search following each link
+        # Performs a depth first traversal.
         for link in new_links:
             yield response.follow(link, callback=self.parse)
