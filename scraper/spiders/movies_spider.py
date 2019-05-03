@@ -7,7 +7,7 @@ import unicodedata
 class MoviesSpider(scrapy.Spider):
     name = 'movies'
 
-    start_urls = ['https://www.imdb.com/title/tt4154796/',
+    start_urls = ['https://www.imdb.com/title/tt0133093/',
                   'https://www.imdb.com/title/tt0206512/']
 
     # Override default settings from settings.py
@@ -15,6 +15,7 @@ class MoviesSpider(scrapy.Spider):
         'ITEM_PIPELINES': {
             'scraper.pipelines.MovieToDBPipeLine': 300
         },
+        'ROBOTSTXT_OBEY': True,
         'DEPTH_LIMIT': 5,
         'CONCURRENT_REQUESTS': 32
     }
