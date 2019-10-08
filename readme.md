@@ -1,6 +1,6 @@
-# CSC459 Big Data - Scrapy Reasearch
+# IMDB Web Scraper
 
-Scrapy is a python framework for scraping data and crawling websites.
+Scrapy is a python framework for scraping data and crawling websites. I have created various crawlers to learn Scrapy and improve my Python skills
 
 ## Project
 
