@@ -19,6 +19,7 @@ the database.
 
 - Install virtualenv
   - `sudo pip3 install --user virtualenv`
+  - *May have to use `sudo -H` with newer versions*
 
 - Create a new virtual environment with venv
   - `virtualenv env`
