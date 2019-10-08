@@ -5,31 +5,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
   </link>
   <title>Movies List</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 </head>
 
-<body class="flex justify-center bg-grey-lightest font-sans">
+<body class="flex justify-center bg-gray-200 font-sans">
 
   <div class="w-1/2">
     <div>
-      <h1 class="text-center text-4xl my-4 ">
+      <h1 class="text-center font-bold text-4xl my-4 underline font-mono ">
         <a href="/" class="no-underline text-blue">Unofficial IMDB Movie List</a>
       </h1>
       <form method="get" class=" w-full">
-        <label class="block text-grey-darker text-sm font-bold mb-2" for="search">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="search">
           Movie Search
         </label>
         <div class="flex mb-8">
           <input
-            class="shadow appearance-none border w-full rounded py-2 px-3 text-grey-darker mb-3 mr-3 leading-tight focus:outline-none focus:shadow-outline"
+            class="shadow appearance-none border w-full rounded py-2 px-3 text-gray-700 mb-3 mr-3 leading-tight focus:outline-none focus:shadow-outline"
             id="search" name="search" type="text"
             placeholder="{{ request.args.get('search') if not None else 'Movie Title'}}">
           <button
-            class="bg-blue hover:bg-blue-dark text-white font-bold mb-3 py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-bold mb-3 py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit">Search</button>
         </div>
       </form>
@@ -38,15 +37,15 @@
       <div class="flex w-full justify-between mb-4">
         <div class="inline-flex">
           <a href="{{ links['prev'] }}">
-            <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-l">Prev</button>
+            <button class="bg-gray-400 hover:bg-gray-500 text-gray-darkest font-bold py-2 px-4 rounded-l">Prev</button>
           </a>
           <a href="{{ links['next'] }}">
-            <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-r">Next</button>
+            <button class="bg-gray-400 hover:bg-gray-500 text-gray-darkest font-bold py-2 px-4 rounded-r">Next</button>
           </a>
         </div>
 
         <!-- Movie Statistics -->
-        <p class="self-center">{{ stats['total'] }} <i class="text-grey roman">movies in the database</i></p>
+        <p class="self-center">{{ stats['total'] }} <i class="text-gray-600 roman">movies in the database</i></p>
         <!-- Only show pages indicator if there are results found -->
         {% if pages['max'] %}
         <p class="self-center">Page {{ pages['current'] }} of {{ pages['max'] }}</p>
@@ -55,7 +54,7 @@
         <!-- Only show results if the user has searched for a title -->
         {% if stats['results'] != -1 %}
         <p class="self-center">{{ stats['results'] }}
-          <i class="text-grey roman">{{ 'results' if stats['results'] > 1 else 'result' }} found</i>
+          <i class="text-gray-600 roman">{{ 'results' if stats['results'] > 1 else 'result' }} found</i>
         </p>
         {% endif %}
       </div>
@@ -64,24 +63,24 @@
     <!-- Movie Card List  -->
     <div>
       {% for movie in movies %}
-      <div class="w-full lg:flex mb-8 h-64">
+      <div class="w-full lg:flex mb-8 h-64 hover:shadow-xl">
         <div
-          class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none border-grey-light lg:rounded-l text-center overflow-hidden"
+          class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none border-gray-700 lg:rounded-l text-center overflow-hidden"
           style="background-image: url({{ movie['poster'] }})" title="{{ movie['title'] }} poster">
         </div>
         <div
-          class="w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+          class="w-full border-r border-b border-l border-gray-light lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
           <div class="mb-8">
             <div class="text-black font-bold text-xl mb-2">
               <a class="no-underline text-black" href="{{ movie['url'] }}">
                 {{ movie['title'] }}
               </a>
             </div>
-            <p class="text-grey-darker text-base">{{movie['summary']}}</p>
+            <p class="text-gray-700 text-base">{{movie['summary']}}</p>
           </div>
           <div class="flex justify-between">
             <div class="flex justify-center items-center">
-              <span class="fas fa-star text-yellow-dark text-2xl mr-2"></span>
+              <span class="fas fa-star text-yellow-400 text-2xl mr-2"></span>
               <h2 class="font-normal">{{movie['rating']}}</h2>
             </div>
             <h2 class="font-normal">{{movie['year']}}</h2>
@@ -92,5 +91,11 @@
     </div>
   </div>
 </body>
+
+<style>
+  * {
+    transition-duration: 0.5s;
+  }
+</style>
 
 </html>
