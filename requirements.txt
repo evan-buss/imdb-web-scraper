@@ -12,7 +12,7 @@ hyperlink==18.0.0
 idna==2.8
 incremental==17.5.0
 itsdangerous==1.1.0
-Jinja2==2.10
+Jinja2>=2.10
 lxml==4.3.3
 MarkupSafe==1.1.1
 parsel==1.5.1
@@ -27,7 +27,7 @@ queuelib==1.5.0
 Scrapy==1.6.0
 service-identity==18.1.0
 six==1.12.0
-Twisted==18.9.0
+Twisted>=18.9.0
 w3lib==1.20.0
-Werkzeug==0.15.1
+Werkzeug>=0.15.1
 zope.interface==4.6.0
