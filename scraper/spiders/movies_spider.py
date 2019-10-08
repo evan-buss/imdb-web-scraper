@@ -16,8 +16,8 @@ class MoviesSpider(scrapy.Spider):
             'scraper.pipelines.MovieToDBPipeLine': 300
         },
         'ROBOTSTXT_OBEY': True,
-        'DEPTH_LIMIT': 5,
-        'CONCURRENT_REQUESTS': 32
+        # 'DEPTH_LIMIT': 5,
+        'CONCURRENT_REQUESTS': 16
     }
 
     # Override default parse method
