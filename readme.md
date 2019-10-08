@@ -55,3 +55,6 @@ the database.
   - /movies
     - List of all movies contained in database
     - Supports title search and pagination
+    
+## Simple Flask Site to View and Search Scraped Data
+![homepage](https://github.com/evan-buss/imdb-web-scraper/blob/master/screenshot/Screen%20Shot%202019-10-07%20at%2020.57.41.png)
